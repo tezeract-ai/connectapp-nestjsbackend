@@ -1,0 +1,58 @@
+import {
+    Controller,
+    Get,
+    Post,
+    Put,
+    Delete,
+    Body,
+    Req,
+    Param,
+} from '@nestjs/common';
+import { AnalyticsService } from './analytics.service'
+import { Request } from 'express';
+
+@Controller('analytics')
+export class AnalyticsController {
+    constructor(private readonly analyticsService: AnalyticsService) { }
+
+    @Get()
+    findAll(): Promise<any> {
+        return this.analyticsService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id): Promise<any> {
+        return this.analyticsService.findOne(id);
+    }
+
+    @Post()
+    filteredAnalysis(
+        @Body('user_id') user_id: any): Promise<any> {
+        return this.analyticsService.filteredAnalysis(user_id);
+    }
+    @Post('/creation')
+    creates(
+        @Req() request: Request): Promise<any> {
+        return this.analyticsService.creates(request.body);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id): Promise<any> {
+        return this.analyticsService.delete(id);
+    }
+
+    @Put(':id')
+    update(@Body('id') id, @Body('shared_to') shared_to: string[],@Body('connectioninfo') connectioninfo: string[]): Promise<any> {
+        return this.analyticsService.update(id, shared_to,connectioninfo);
+    }
+    @Put('update/:id')
+    updatename(@Param('id') id, @Body('fileName') fileName: string): Promise<any> {
+        return this.analyticsService.updatename(id, fileName);
+    }
+    @Put('updatefolderid/:id')
+    updatefolderid(@Param('id') id, @Body('folderId') folderId: string): Promise<any> {
+        return this.analyticsService.updatefolderid(id, folderId);
+    }
+}
+
+
