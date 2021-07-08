@@ -7,9 +7,10 @@ import {
     Body,
     Req,
     Param,
+    Res,
 } from '@nestjs/common';
 import { AnalyticsService } from './analytics.service'
-import { Request } from 'express';
+import { Request,Response } from 'express';
 
 @Controller('analytics')
 export class AnalyticsController {
@@ -30,10 +31,20 @@ export class AnalyticsController {
         @Body('user_id') user_id: any): Promise<any> {
         return this.analyticsService.filteredAnalysis(user_id);
     }
+    @Post('/sharedanalysis')
+    sharedAnalysis(
+        @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any): Promise<any> {
+        return this.analyticsService.sharedAnalysis(user_id,videouri,kicktype);
+    }
     @Post('/creation')
     creates(
         @Req() request: Request): Promise<any> {
         return this.analyticsService.creates(request.body);
+    }
+    @Post('/createtoken')
+    createtoken(
+        @Body('token') token: any,@Res() response:Response): Promise<any> {
+        return this.analyticsService.createtoken(token,response);
     }
 
     @Delete(':id')

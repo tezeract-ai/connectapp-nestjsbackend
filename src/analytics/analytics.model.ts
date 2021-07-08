@@ -5,6 +5,9 @@ export const AnalyticsSchema = new mongoose.Schema({
     Thumbnail: {
         type: String,
     },
+    kicktype: {
+        type: String,
+    },
     Post_Frame: {
         type: String,
     },
@@ -12,6 +15,9 @@ export const AnalyticsSchema = new mongoose.Schema({
         type: String,
     },
     AI_Response:  {
+        type: String,
+    },
+    videouri:  {
         type: String,
     },
     shared_to:  {
@@ -32,8 +38,11 @@ export interface Analytics {
     Thumbnail: string;
     Post_Frame: string;
     AI_Video: string;
-    AI_Response: string;
+    videouri: string;
 
+    
+    AI_Response: string;
+kicktype:string;
     shared_to: string[];
 
     Analysis: string[]
@@ -46,6 +55,8 @@ export class CreateAnalyticsDto {
     Post_Frame: string;
     AI_Video: string;
     AI_Response: string;
+    kicktype:string;
+    videouri: string;
 
     shared_to: string[];
 
