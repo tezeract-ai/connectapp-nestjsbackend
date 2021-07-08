@@ -43,8 +43,8 @@ export class AnalyticsController {
     }
     @Post('/createtoken')
     createtoken(
-        @Body('token') token: any,@Res() response:Response): Promise<any> {
-        return this.analyticsService.createtoken(token,response);
+        @Body('token') token: any, @Body('body') body: any, @Body('title') title: any,@Res() response:Response): Promise<any> {
+        return this.analyticsService.createtoken(token,body,title,response);
     }
 
     @Delete(':id')
