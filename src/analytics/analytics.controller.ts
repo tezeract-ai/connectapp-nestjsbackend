@@ -31,10 +31,10 @@ export class AnalyticsController {
         @Body('user_id') user_id: any): Promise<any> {
         return this.analyticsService.filteredAnalysis(user_id);
     }
-    @Post('/sharedanalysis')
-    sharedAnalysis(
+    @Post('/sendanalysis')
+    sendAnalysis(
         @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
-        return this.analyticsService.sharedAnalysis(user_id,videouri,kicktype,token);
+        return this.analyticsService.sendAnalysis(user_id,videouri,kicktype,token);
     }
     @Post('/creation')
     creates(
