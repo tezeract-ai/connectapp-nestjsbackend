@@ -2,8 +2,8 @@ import * as mongoose from 'mongoose';
 
 export const AnalyticsSchema = new mongoose.Schema({
     user_id: {type: String},
-    Thumbnail: {
-        type: String,
+    thumbnail: {
+        type: Array,
     },
     kicktype: {
         type: String,
@@ -11,18 +11,18 @@ export const AnalyticsSchema = new mongoose.Schema({
     Post_Frame: {
         type: String,
     },
-    AI_Video:  {
-        type: String,
+    ai_video:  {
+        type: Array,
     },
-    AI_Response:  {
-        type: String,
+    ai_response:  {
+        type: Array,
     },
     videouri:  {
         type: String,
     },
     shared_to:  {
         type: Array,
-    }, Analysis: {
+    }, analysis: {
         type: Array,
     }, connectioninfo: {
         type: Array,
@@ -35,32 +35,32 @@ export const AnalyticsSchema = new mongoose.Schema({
 export interface Analytics {
 
     user_id: string;
-    Thumbnail: string;
+    thumbnail: string[];
     Post_Frame: string;
-    AI_Video: string;
+    ai_video: string[];
     videouri: string;
 
     
-    AI_Response: string;
+    ai_response: string[];
 kicktype:string;
     shared_to: string[];
 
-    Analysis: string[]
+    analysis: string[]
     connectioninfo:string[]
 
 }
 export class CreateAnalyticsDto {
     user_id: string;
-    Thumbnail: string;
+    thumbnail: string[];
     Post_Frame: string;
-    AI_Video: string;
-    AI_Response: string;
+    ai_video: string[];
+    ai_response: string;
     kicktype:string;
     videouri: string;
 
     shared_to: string[];
 
-    Analysis: string[]
+    analysis: string[]
     connectioninfo:string[]
 
 }
