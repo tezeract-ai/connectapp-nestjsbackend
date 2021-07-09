@@ -33,8 +33,8 @@ export class AnalyticsController {
     }
     @Post('/sharedanalysis')
     sharedAnalysis(
-        @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any): Promise<any> {
-        return this.analyticsService.sharedAnalysis(user_id,videouri,kicktype);
+        @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
+        return this.analyticsService.sharedAnalysis(user_id,videouri,kicktype,token);
     }
     @Post('/creation')
     creates(

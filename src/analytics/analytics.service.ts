@@ -85,7 +85,7 @@ export class AnalyticsService {
       }
 
 
-    async sharedAnalysis(user_id: any,videouri:any,kicktype:string): Promise<any> {
+    async sharedAnalysis(user_id: any,videouri:any,kicktype:string,token:any): Promise<any> {
 
 console.log('sharedanalysis',user_id,videouri)
 const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
@@ -102,7 +102,7 @@ console.log('useranalysis2',useranalysis)
 return useranalysis
 
 
-    }
+}
     async creates(req: any): Promise<any> {
         console.log('analysis', req)
         const newAnalyis = new this.analyticsModel(req);
