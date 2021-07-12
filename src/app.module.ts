@@ -18,7 +18,8 @@ import { AnalyticsService } from './analytics/analytics.service';
     NodemailerModule,
     AuthModule,
     AnalyticsModule,
-    MongooseModule.forRoot('mongodb+srv://dbUser:12345@cluster0.bgso9.mongodb.net/Playercloud?retryWrites=true&w=majority')],
+    MongooseModule.forRoot('mongodb+srv://arsalan123:arsalan123@contactkeepermern.xe8pl.mongodb.net/playercloudanalysis?retryWrites=true&w=majority')],
+    // MongooseModule.forRoot('mongodb+srv://dbUser:12345@cluster0.bgso9.mongodb.net/Playercloud?retryWrites=true&w=majority')],
   controllers: [AppController, ],
   providers: [AppService, ],
 })
