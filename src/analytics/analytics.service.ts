@@ -86,27 +86,40 @@ export class AnalyticsService {
 
 
     async sendAnalysis(user_id: any,videouri:any,kicktype:string,token:any): Promise<any> {
+        var formData = new FormData();
+        console.log('sharedanalysis',user_id,videouri)
+        const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
+        let useranalysis=await newAnalyis.save()
+        const findUserIdinAnalysis= await this.analyticsModel.find({user_id:user_id})
+        const initial=findUserIdinAnalysis?'False':'True'
+        console.log('initial',initial)
+        console.log('useranalysis',useranalysis)
 
-console.log('sharedanalysis',user_id,videouri)
-const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
-let useranalysis=await newAnalyis.save()
-const findUserIdinAnalysis= await this.analyticsModel.find({user_id:user_id})
-const initial=findUserIdinAnalysis?false:true
-console.log('initial',initial)
-console.log('useranalysis',useranalysis)
+        formData.append('video',videouri)
+        formData.append('video_p01_start_time','0')
+        formData.append('video_p02_start_time','21')
+        formData.append('video_p03_start_time','1')
+        formData.append('user_id',useranalysis.user_id)
+        formData.append('height','170')
+        formData.append('gender','male')
+        formData.append('initial',initial)
+        formData.append('datetime',useranalysis.createdAt)
+        formData.append('token',token)
 
-fetch('http://139.59.34.247:5000/api/video_processing', { method: 'POST',  body: {
-    video: videouri,
-    video_p01_start_time: 0,
-    video_p02_start_time: 21,
-    video_p03_start_time: 31,
-    user_id:useranalysis.user_id,
-    height: 170,
-    gender: 'male',
-    initial: initial,
-    datetime: useranalysis.createdAt,
-    token: token,
-  },headers: { 'Content-Type': 'multipart/form-data' },
+
+fetch('http://139.59.34.247:5000/api/video_processing', { method: 'POST',  body: formData
+    // video: videouri,
+    // video_p01_start_time: 0,
+    // video_p02_start_time: 21,
+    // video_p03_start_time: 41,
+    // user_id:useranalysis.user_id,
+    // height: 170,
+    // gender: 'male',
+    // initial: initial,
+    // datetime: useranalysis.createdAt,
+    // token: token,
+
+  ,headers: { 'Content-Type': 'multipart/form-data' },
 })
     .then(res => res.json())
     .then(json => console.log(json));
