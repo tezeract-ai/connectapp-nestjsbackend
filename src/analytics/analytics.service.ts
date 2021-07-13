@@ -110,21 +110,12 @@ export class AnalyticsService {
         formData.append('datetime',useranalysis.createdAt)
         formData.append('token',token)
 
-
-fetch('http://139.59.34.247:5000/api/video_processing', { method: 'POST',  body: formData
-    // video: videouri,
-    // video_p01_start_time: 0,
-    // video_p02_start_time: 21,
-    // video_p03_start_time: 41,
-    // user_id:useranalysis.user_id,
-    // height: 170,
-    // gender: 'male',
-    // initial: initial,
-    // datetime: useranalysis.createdAt,
-    // token: token,
-
-  ,headers: { 'Content-Type': 'multipart/form-data' },
-})
+        const options = {
+            method: 'POST',
+            body: formData,
+            headers: formData.getHeaders()
+        }
+fetch('http://139.59.34.247:5000/api/video_processing',options)
     .then(res => res.json())
     .then(json => console.log(json));
 
