@@ -14,15 +14,18 @@ export class UsersdataService {
         console.log('userid', userid,fcmtoken)
         // let checknode = await this.nodeModel.find({ nodeid: node.nodeid })
         // console.log('checknode', checknode)
-        const checkuser = await this.usersdataModel.findOne({ userid:userid })
-        console.log('checkuser', checkuser)
-        if (checkuser) {
-          return { message: 'User Already exists' }
-        } else {
-          const newuser = new this.usersdataModel({userid:userid,fcmtoken:fcmtoken});
-          console.log('newuser', newuser)
-          return await newuser.save();
-        }
+        // const checkuser = await this.usersdataModel.findOne({ userid:userid })
+        // console.log('checkuser', checkuser)
+        // if (checkuser) {
+        //   return { message: 'User Already exists' }
+        // } else {
+        //   const newuser = new this.usersdataModel({userid:userid,fcmtoken:fcmtoken});
+        //   console.log('newuser', newuser)
+        //   return await newuser.save();
+        // }
+        const createdataofusers=await this.usersdataModel.findByIdAndUpdate({userid:userid}, {userid:userid ,fcmtoken:fcmtoken}, { new: true });
+        console.log("createdataofusers",createdataofusers)
+        return await createdataofusers.save()
     }
    
 

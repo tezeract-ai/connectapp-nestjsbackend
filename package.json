@@ -12,7 +12,6 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -31,6 +30,7 @@
     "firebase-admin": "^9.10.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",

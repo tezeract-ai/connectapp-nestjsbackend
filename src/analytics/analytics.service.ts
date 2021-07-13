@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Analytics } from './analytics.model'
 import * as admin from "firebase-admin";
-
+import fetch from 'node-fetch'
 const serviceAccount = require("../../player-cloud-tech-firebase-adminsdk-73bm5-a080777234.json");
 
 admin.initializeApp({
@@ -90,15 +90,35 @@ export class AnalyticsService {
 console.log('sharedanalysis',user_id,videouri)
 const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
 let useranalysis=await newAnalyis.save()
+const findUserIdinAnalysis= await this.analyticsModel.find({user_id:user_id})
+const initial=findUserIdinAnalysis?false:true
+console.log('initial',initial)
 console.log('useranalysis',useranalysis)
-useranalysis={
+
+fetch('http://139.59.34.247:5000/api/video_processing', { method: 'POST',  body: {
+    video: videouri,
+    video_p01_start_time: 0,
+    video_p02_start_time: 21,
+    video_p03_start_time: 31,
     user_id:useranalysis.user_id,
-    _id:useranalysis._id,
-    videouri:videouri,
-    createdAt:useranalysis.createdAt,
-    kicktype:useranalysis.kicktype
-}
-console.log('useranalysis2',useranalysis)
+    height: 170,
+    gender: 'male',
+    initial: initial,
+    datetime: useranalysis.createdAt,
+    token: token,
+  },headers: { 'Content-Type': 'multipart/form-data' },
+})
+    .then(res => res.json())
+    .then(json => console.log(json));
+
+    useranalysis={
+        user_id:useranalysis.user_id,
+        _id:useranalysis._id,
+        videouri:videouri,
+        createdAt:useranalysis.createdAt,
+        kicktype:useranalysis.kicktype
+    }
+    console.log('useranalysis2',useranalysis)
 return useranalysis
 
 
