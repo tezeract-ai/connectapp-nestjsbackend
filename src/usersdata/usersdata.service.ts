@@ -23,7 +23,7 @@ export class UsersdataService {
         //   console.log('newuser', newuser)
         //   return await newuser.save();
         // }
-        const createdataofusers=await this.usersdataModel.findByIdAndUpdate({userid:userid}, {userid:userid ,fcmtoken:fcmtoken}, { new: true });
+        const createdataofusers=await this.usersdataModel.findOneAndUpdate({userid:userid}, {userid:userid ,fcmtoken:fcmtoken}, { new: true,upsert: true,returnNewDocument:true });
         console.log("createdataofusers",createdataofusers)
         return await createdataofusers.save()
     }
