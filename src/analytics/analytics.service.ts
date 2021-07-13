@@ -5,6 +5,9 @@ import { Analytics } from './analytics.model'
 import * as admin from "firebase-admin";
 import fetch from 'node-fetch'
 const serviceAccount = require("../../player-cloud-tech-firebase-adminsdk-73bm5-a080777234.json");
+var FormData = require('form-data');
+var fs = require('fs');
+
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -86,7 +89,7 @@ export class AnalyticsService {
 
 
     async sendAnalysis(user_id: any,videouri:any,kicktype:string,token:any): Promise<any> {
-        var formData = new FormData();
+        let formData = new FormData();
         console.log('sharedanalysis',user_id,videouri)
         const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
         let useranalysis=await newAnalyis.save()
@@ -95,7 +98,8 @@ export class AnalyticsService {
         console.log('initial',initial)
         console.log('useranalysis',useranalysis)
 
-        formData.append('video',videouri)
+        formData.append('video',fs.createReadStream(videouri))
+
         formData.append('video_p01_start_time','0')
         formData.append('video_p02_start_time','21')
         formData.append('video_p03_start_time','1')
