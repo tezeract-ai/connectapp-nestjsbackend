@@ -98,7 +98,7 @@ export class AnalyticsService {
         console.log('initial',initial)
         console.log('useranalysis',useranalysis)
 
-        formData.append('video',fs.createReadStream(videouri))
+        formData.append('video',videouri)
 
         formData.append('video_p01_start_time','0')
         formData.append('video_p02_start_time','21')
