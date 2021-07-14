@@ -19,6 +19,7 @@ import { UsersdataService } from './usersdata/usersdata.service';
   imports: [
     ProductModule,
     NodemailerModule,
+    
     AuthModule,
     AnalyticsModule,
     UsersdataModule,

@@ -88,37 +88,43 @@ export class AnalyticsService {
       }
 
 
-    async sendAnalysis(user_id: any,videouri:any,kicktype:string,token:any): Promise<any> {
+    async sendAnalysis(user_id: any,videouri:any,kicktype:string,token:any,video:any): Promise<any> {
+        console.log('sharedanalysis',user_id,videouri,video,kicktype,token)
         let formData = new FormData();
-        console.log('sharedanalysis',user_id,videouri)
         const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
         let useranalysis=await newAnalyis.save()
         const findUserIdinAnalysis= await this.analyticsModel.find({user_id:user_id})
         const initial=findUserIdinAnalysis?'False':'True'
+        var filetype='video'
+        var filename='video'
         console.log('initial',initial)
-        console.log('useranalysis',useranalysis)
-
-        formData.append('video',videouri)
-
+        console.log('useranalysis',useranalysis,useranalysis._id,useranalysis.user_id,video)
+        formData.append('video',video.buffer,filename)
         formData.append('video_p01_start_time','0')
         formData.append('video_p02_start_time','21')
-        formData.append('video_p03_start_time','1')
+        formData.append('video_p03_start_time','41')
         formData.append('user_id',useranalysis.user_id)
         formData.append('height','170')
         formData.append('gender','male')
+        formData.append('analysis_id',useranalysis._id + '')
         formData.append('initial',initial)
-        formData.append('datetime',useranalysis.createdAt)
+        formData.append('datetime','july 05, 2012')
         formData.append('token',token)
 
         const options = {
             method: 'POST',
             body: formData,
             headers: formData.getHeaders()
-        }
-fetch('http://139.59.34.247:5000/api/video_processing',options)
-    .then(res => res.json())
-    .then(json => console.log(json));
 
+        }
+        try {
+            fetch('http://139.59.34.247:5000/api/video_processing',options)
+            
+        } catch (error) {
+            console.log('error',error)
+        }
+    // .then(res => res.json())
+    // .then(json => console.log(json)).catch(err=>console.log('error res',err));
     useranalysis={
         user_id:useranalysis.user_id,
         _id:useranalysis._id,

@@ -39,7 +39,7 @@ export interface Analytics {
     Post_Frame: string;
     ai_video: string[];
     videouri: string;
-
+video:any
     
     ai_response: string[];
 kicktype:string;
@@ -57,7 +57,7 @@ export class CreateAnalyticsDto {
     ai_response: string;
     kicktype:string;
     videouri: string;
-
+video:any;
     shared_to: string[];
 
     analysis: string[]

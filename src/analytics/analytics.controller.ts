@@ -8,9 +8,12 @@ import {
     Req,
     Param,
     Res,
+    UseInterceptors,
+    UploadedFile,
 } from '@nestjs/common';
 import { AnalyticsService } from './analytics.service'
 import { Request,Response } from 'express';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('analytics')
 export class AnalyticsController {
@@ -32,9 +35,13 @@ export class AnalyticsController {
         return this.analyticsService.filteredAnalysis(user_id);
     }
     @Post('/sendanalysis')
+    @UseInterceptors(FileInterceptor('video'))
+
     sendAnalysis(
+        @UploadedFile() video,
         @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
-        return this.analyticsService.sendAnalysis(user_id,videouri,kicktype,token);
+     console.log('file',video)
+            return this.analyticsService.sendAnalysis(user_id,videouri,kicktype,token,video);
     }
     @Post('/creation')
     creates(
@@ -43,6 +50,7 @@ export class AnalyticsController {
     }
     @Post('/createtoken')
     createtoken(
+
         @Body('token') token: any, @Body('body') body: any, @Body('title') title: any,@Res() response:Response): Promise<any> {
         return this.analyticsService.createtoken(token,body,title,response);
     }
