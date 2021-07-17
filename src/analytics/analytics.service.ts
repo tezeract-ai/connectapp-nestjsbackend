@@ -28,7 +28,7 @@ export class AnalyticsService {
 
     async filteredAnalysis(user_id: any): Promise<any> {
         console.log('user_id', user_id)
-        const findbyuserid = await this.analyticsModel.find( { $or: [ { shared_to:user_id} , { user_id: user_id } ] } ).sort({'createdAt': 1});
+        const findbyuserid = await this.analyticsModel.find( { $or: [ { shared_to:user_id} , { user_id: user_id } ] } ).sort({_id: 1});
 
 
 
@@ -129,7 +129,7 @@ export class AnalyticsService {
         useranalysis={
             user_id:useranalysis.user_id,
             _id:useranalysis._id,
-            videouri:videouri,
+            videouri:[videouri],
             createdAt:useranalysis.createdAt,
             kicktype:useranalysis.kicktype
         }
