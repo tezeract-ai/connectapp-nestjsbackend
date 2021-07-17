@@ -18,7 +18,7 @@ export const AnalyticsSchema = new mongoose.Schema({
         type: Array,
     },
     videouri:  {
-        type: String,
+        type: Array,
     },
     shared_to:  {
         type: Array,
@@ -38,7 +38,7 @@ export interface Analytics {
     thumbnail: string[];
     Post_Frame: string;
     ai_video: string[];
-    videouri: string;
+    videouri: string[];
 video:any
     
     ai_response: string[];
@@ -56,7 +56,7 @@ export class CreateAnalyticsDto {
     ai_video: string[];
     ai_response: string;
     kicktype:string;
-    videouri: string;
+    videouri: string[];
 video:any;
     shared_to: string[];
 
