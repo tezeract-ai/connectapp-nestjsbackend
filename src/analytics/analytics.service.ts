@@ -91,6 +91,8 @@ export class AnalyticsService {
     async sendAnalysis(user_id: any,videouri:any,kicktype:string,token:any,video:any): Promise<any> {
         console.log('sharedanalysis',user_id,videouri,video,kicktype,token)
         try {
+            // throw[404,'something went wrong']        
+
             let formData = new FormData();
             const newAnalyis =await new this.analyticsModel({user_id:user_id,kicktype:kicktype,videouri:videouri});
             let useranalysis=await newAnalyis.save()
@@ -136,8 +138,7 @@ export class AnalyticsService {
         console.log('useranalysis2',useranalysis)
     return useranalysis
         } catch (error) {
-            return{ msg:'Oops look like you did not send a valid video'}
-        }
+throw[404,'something went wrong']        }
       
 
 
