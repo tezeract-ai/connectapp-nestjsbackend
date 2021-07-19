@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Analytics } from './analytics.model'
 import * as admin from "firebase-admin";
 import fetch from 'node-fetch'
+import { json } from 'express';
 const serviceAccount = require("../../player-cloud-tech-firebase-adminsdk-73bm5-a080777234.json");
 var FormData = require('form-data');
 var fs = require('fs');
@@ -77,7 +78,7 @@ export class AnalyticsService {
            .then( response => {
                //configure your response here
                
-               res.status(200).send("Notification sent successfully")
+               res.status(200).send({message:"Notification sent successfully"})
                console.log('response',response)
             
            })
