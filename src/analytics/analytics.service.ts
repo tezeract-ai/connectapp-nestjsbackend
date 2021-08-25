@@ -103,16 +103,17 @@ export class AnalyticsService {
             var filename='video'
             console.log('initial',initial)
             console.log('useranalysis',useranalysis,useranalysis._id,useranalysis.user_id,video)
-            formData.append('video',video.buffer,filename)
-            formData.append('video_p01_start_time','0')
-            formData.append('video_p02_start_time','21')
-            formData.append('video_p03_start_time','41')
+            formData.append('video_1',video.buffer,filename)
+            formData.append('video_2',null)
+            formData.append('video_3',null)
+
+            formData.append('video_flags[]',[true,false,false])
             formData.append('user_id',useranalysis.user_id)
             formData.append('height','170')
-            formData.append('gender','male')
+            formData.append('gender','Male')
             formData.append('analysis_id',useranalysis._id + '')
             formData.append('initial',initial)
-            formData.append('datetime','july 05, 2012')
+            formData.append('kick_type','Right')
             formData.append('token',token)
     
             const options = {
