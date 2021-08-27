@@ -39,9 +39,9 @@ export class AnalyticsController {
 
     sendAnalysis(
         @UploadedFile() video,
-        @Body('user_id') user_id: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
+        @Body('user_id') user_id: any, @Body('userName') userName: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
      console.log('file',video)
-            return this.analyticsService.sendAnalysis(user_id,videouri,kicktype,token,video);
+            return this.analyticsService.sendAnalysis(user_id,userName,videouri,kicktype,token,video);
     }
     @Post('/creation')
     creates(

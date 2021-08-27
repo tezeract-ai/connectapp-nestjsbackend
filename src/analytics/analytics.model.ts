@@ -2,6 +2,8 @@ import * as mongoose from 'mongoose';
 
 export const AnalyticsSchema = new mongoose.Schema({
     user_id: {type: String},
+    userName: {type: String},
+
     thumbnail: {
         type: Array,
     },
@@ -35,12 +37,12 @@ export const AnalyticsSchema = new mongoose.Schema({
 export interface Analytics {
 
     user_id: string;
+    userName:string;
     thumbnail: string[];
     Post_Frame: string;
     ai_video: string[];
     videouri: string[];
 video:any
-    
     ai_response: string[];
 kicktype:string;
     shared_to: string[];
@@ -51,6 +53,8 @@ kicktype:string;
 }
 export class CreateAnalyticsDto {
     user_id: string;
+    userName:string;
+
     thumbnail: string[];
     Post_Frame: string;
     ai_video: string[];
