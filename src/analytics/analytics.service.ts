@@ -89,13 +89,13 @@ export class AnalyticsService {
     }
 
 
-    async sendAnalysis(user_id: any,userName:any, videouri: any, kicktype: string, token: any, video: any): Promise<any> {
+    async sendAnalysis(user_id: any, userName: any, videouri: any, kicktype: string, token: any, video: any): Promise<any> {
         console.log('sharedanalysis', user_id, videouri, video, kicktype, token)
         try {
             // throw[404,'something went wrong']        
 
             let formData = new FormData();
-            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName, kicktype: kicktype, videouri: videouri });
+            const newAnalyis = await new this.analyticsModel({ user_id: user_id, userName: userName, kicktype: kicktype, videouri: videouri });
             console.log('newAnalyis', newAnalyis)
             let useranalysis = await newAnalyis.save()
             console.log('useranalysis', useranalysis)
@@ -112,7 +112,7 @@ export class AnalyticsService {
             formData.append('video_flag_02', 'False')
             formData.append('video_flag_03', 'False')
             formData.append('user_id', useranalysis.user_id)
-            formData.append('height', '170')
+            formData.append('height', '70')
             formData.append('gender', 'Male')
             formData.append('analysis_id', useranalysis._id + '')
             formData.append('initial', initial)
@@ -134,7 +134,7 @@ export class AnalyticsService {
             // .then(json => console.log(json)).catch(err=>console.log('error res',err));
             useranalysis = {
                 user_id: useranalysis.user_id,
-                userName:useranalysis.userName,
+                userName: useranalysis.userName,
                 _id: useranalysis._id,
                 videouri: useranalysis.videouri,
                 createdAt: useranalysis.createdAt,
