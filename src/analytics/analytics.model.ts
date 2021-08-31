@@ -7,6 +7,9 @@ export const AnalyticsSchema = new mongoose.Schema({
     thumbnail: {
         type: Array,
     },
+    status:{
+type:String
+    },
     kicktype: {
         type: String,
     },
@@ -39,6 +42,7 @@ export interface Analytics {
     user_id: string;
     userName:string;
     thumbnail: string[];
+    status:string;
     Post_Frame: string;
     ai_video: string[];
     videouri: string[];
@@ -54,6 +58,7 @@ kicktype:string;
 export class CreateAnalyticsDto {
     user_id: string;
     userName:string;
+    status:string;
 
     thumbnail: string[];
     Post_Frame: string;

@@ -90,7 +90,7 @@ export class AnalyticsService {
 
 
     async sendAnalysis(user_id: any,userName:any, videouri: any, kicktype: string, token: any, video: any): Promise<any> {
-        console.log('sharedanalysis', user_id, videouri, video, kicktype, token)
+        console.log('sharedanalysis', user_id, userName,videouri, video, kicktype, token)
         try {
             // throw[404,'something went wrong']        
 
@@ -112,7 +112,7 @@ export class AnalyticsService {
             formData.append('video_flag_02', 'False')
             formData.append('video_flag_03', 'False')
             formData.append('user_id', useranalysis.user_id)
-            formData.append('height', '170')
+            formData.append('height', '70')
             formData.append('gender', 'Male')
             formData.append('analysis_id', useranalysis._id + '')
             formData.append('initial', initial)
