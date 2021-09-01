@@ -41,6 +41,9 @@ export interface Analytics {
 
     user_id: string;
     userName:string;
+    gender:string;
+    height:string;
+    kickingFoot:string;
     thumbnail: string[];
     status:string;
     Post_Frame: string;
@@ -58,6 +61,9 @@ kicktype:string;
 export class CreateAnalyticsDto {
     user_id: string;
     userName:string;
+    gender:string;
+    height:string;
+    kickingFoot:string;
     status:string;
 
     thumbnail: string[];

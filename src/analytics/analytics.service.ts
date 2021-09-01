@@ -89,11 +89,12 @@ export class AnalyticsService {
     }
 
 
-    async sendAnalysis(user_id: any,userName:any, videouri: any, kicktype: string, token: any, video: any): Promise<any> {
-        console.log('sharedanalysis', user_id, userName,videouri, video, kicktype, token)
+    async sendAnalysis(user_id: any,userName:any, gender:any,height:any,kickingFoot:any,videouri: any, kicktype: string, token: any, video: any): Promise<any> {
+        console.log('sharedanalysis', user_id, userName,gender,height,kickingFoot,videouri, video, kicktype, token)
         try {
             // throw[404,'something went wrong']        
-
+let kickfoot=kickingFoot==='Left Foot' ? 'Left' : 'Right'
+console.log('kickfoot',kickfoot)
             let formData = new FormData();
             const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName, kicktype: kicktype, videouri: videouri });
             console.log('newAnalyis', newAnalyis)
@@ -112,11 +113,11 @@ export class AnalyticsService {
             formData.append('video_flag_02', 'False')
             formData.append('video_flag_03', 'False')
             formData.append('user_id', useranalysis.user_id)
-            formData.append('height', '70')
-            formData.append('gender', 'Male')
+            formData.append('height', height)
+            formData.append('gender', gender)
             formData.append('analysis_id', useranalysis._id + '')
             formData.append('initial', initial)
-            formData.append('kick_type', 'Right')
+            formData.append('kick_type', kickfoot)
 
             formData.append('token', token)
 
