@@ -171,4 +171,15 @@ console.log('kickfoot',kickfoot)
     async updatefolderid(id: string, folderId: string): Promise<any> {
         return await this.analyticsModel.findByIdAndUpdate(id, { folderId: folderId }, { new: true });
     }
+    async createbeatthat(analyticsid: string,userid:string): Promise<any> {
+        console.log('id', analyticsid,userid)
+        let beatthatanalysis= await this.analyticsModel.findOne({_id:analyticsid})
+        console.log('beatthatanalysis',beatthatanalysis)
+        beatthatanalysis.shared_to.push(userid)
+        console.log('beatthatanalysis2',beatthatanalysis)
+        return beatthatanalysis.save()
+
+
+
+    }
 }

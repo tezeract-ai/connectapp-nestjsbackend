@@ -72,6 +72,10 @@ export class AnalyticsController {
     updatefolderid(@Param('id') id, @Body('folderId') folderId: string): Promise<any> {
         return this.analyticsService.updatefolderid(id, folderId);
     }
+    @Post('/createbeatthat')
+    createbeatthat(@Body('analyticsid') analyticsid: string,@Body('userid') userid: string): Promise<any> {
+        return this.analyticsService.createbeatthat(analyticsid,userid);
+    }
 }
 
 
