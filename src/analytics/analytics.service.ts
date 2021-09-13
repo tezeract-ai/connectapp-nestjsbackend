@@ -89,14 +89,14 @@ export class AnalyticsService {
     }
 
 
-    async sendAnalysis(user_id: any,userName:any, gender:any,height:any,kickingFoot:any,videouri: any, kicktype: string, token: any, video: any): Promise<any> {
-        console.log('sharedanalysis', user_id, userName,gender,height,kickingFoot,videouri, video, kicktype, token)
+    async sendAnalysis(user_id: any,userName:any, gender:any,height:any,kickingFoot:any,videouri: any, kicktype: string, useravatar:any,token: any, video: any): Promise<any> {
+        console.log('sharedanalysis', user_id, userName,gender,height,kickingFoot,videouri, video, kicktype, useravatar,token)
         try {
             // throw[404,'something went wrong']        
 let kickfoot=kickingFoot==='Left Foot' ? 'Left' : 'Right'
 console.log('kickfoot',kickfoot)
             let formData = new FormData();
-            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName, kicktype: kicktype, videouri: videouri });
+            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName, kicktype: kicktype, useravatar:useravatar,videouri: videouri });
             console.log('newAnalyis', newAnalyis)
             let useranalysis = await newAnalyis.save()
             console.log('useranalysis', useranalysis)
@@ -139,16 +139,47 @@ console.log('kickfoot',kickfoot)
                 _id: useranalysis._id,
                 videouri: useranalysis.videouri,
                 createdAt: useranalysis.createdAt,
-                kicktype: useranalysis.kicktype
+                kicktype: useranalysis.kicktype,
+                useravatar:useranalysis.useravatar
             }
             console.log('useranalysis2', useranalysis)
             return useranalysis
         } catch (error) {
             throw [404, 'something went wrong']
         }
+    }
+    async sendImage(user_id: any,image: any): Promise<any> {
+        console.log('sendimage', user_id, image)
+        try {
+            // throw[404,'something went wrong']        
+            let formData = new FormData();
 
+            var filename = 'image'
+            formData.append('Image', image.buffer, filename)
+            formData.append('user_id',user_id)
+       
+          
 
-
+            const options = {
+                method: 'POST',
+                body: formData,
+                headers: formData.getHeaders()
+            }
+            let hosteduri
+            try {
+                fetch('http://139.59.34.247:5000/api/Profile_Picture', options).then(response => hosteduri=response.json())
+            } catch (error) {
+                console.log('error', error)
+            }
+            console.log('hosteduri',hosteduri)
+            return hosteduri
+            // .then(res => res.json())
+            // .then(json => console.log(json)).catch(err=>console.log('error res',err));
+         
+            
+        } catch (error) {
+            throw [404, 'something went wrong']
+        }
     }
     async creates(req: any): Promise<any> {
         console.log('analysis', req)

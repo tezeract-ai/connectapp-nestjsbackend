@@ -39,9 +39,18 @@ export class AnalyticsController {
 
     sendAnalysis(
         @UploadedFile() video,
-        @Body('user_id') user_id: any, @Body('userName') userName: any,@Body('gender') gender: any,@Body('height') height: any,@Body('kickingFoot') kickingFoot: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any, @Body('token') token: any): Promise<any> {
+        @Body('user_id') user_id: any, @Body('userName') userName: any,@Body('gender') gender: any,@Body('height') height: any,@Body('kickingFoot') kickingFoot: any, @Body('videouri') videouri: any, @Body('kicktype') kicktype: any,@Body('useravatar') useravatar: any, @Body('token') token: any): Promise<any> {
      console.log('file',video)
-            return this.analyticsService.sendAnalysis(user_id,userName,gender,height,kickingFoot,videouri,kicktype,token,video);
+            return this.analyticsService.sendAnalysis(user_id,userName,gender,height,kickingFoot,videouri,kicktype,useravatar,token,video);
+    }
+    @Post('/sendimage')
+    @UseInterceptors(FileInterceptor('image'))
+
+    sendImage(
+        @UploadedFile() image,
+        @Body('user_id') user_id: any,): Promise<any> {
+     console.log('file',image)
+            return this.analyticsService.sendImage(user_id,image);
     }
     @Post('/creation')
     creates(

@@ -13,6 +13,10 @@ type:String
     kicktype: {
         type: String,
     },
+    
+    useravatar: {
+        type: String,
+    },
     Post_Frame: {
         type: String,
     },
@@ -46,6 +50,7 @@ export interface Analytics {
     kickingFoot:string;
     thumbnail: string[];
     status:string;
+    useravatar:string;
     Post_Frame: string;
     ai_video: string[];
     videouri: string[];
@@ -65,6 +70,7 @@ export class CreateAnalyticsDto {
     height:string;
     kickingFoot:string;
     status:string;
+    useravatar:string;
 
     thumbnail: string[];
     Post_Frame: string;
