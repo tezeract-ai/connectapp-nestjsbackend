@@ -91,12 +91,13 @@ export class AnalyticsService {
 
     async sendAnalysis(user_id: any,userName:any, gender:any,height:any,kickingFoot:any,videouri: any, kicktype: string, useravatar:any,token: any, video: any): Promise<any> {
         console.log('sharedanalysis', user_id, userName,gender,height,kickingFoot,videouri, video, kicktype, useravatar,token)
+      let thumbnailOfVideoUri="https://playercloudbucket.s3.us-east-2.amazonaws.com/Profile_pictures/User_abcz123989/profile_picture.png"
         try {
             // throw[404,'something went wrong']        
 let kickfoot=kickingFoot==='Left Foot' ? 'Left' : 'Right'
 console.log('kickfoot',kickfoot)
             let formData = new FormData();
-            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName, kicktype: kicktype, useravatar:useravatar,videouri: videouri });
+            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName,thumbnail:thumbnailOfVideoUri, kicktype: kicktype, useravatar:useravatar,videouri: videouri });
             console.log('newAnalyis', newAnalyis)
             let useranalysis = await newAnalyis.save()
             console.log('useranalysis', useranalysis)
@@ -136,6 +137,7 @@ console.log('kickfoot',kickfoot)
             useranalysis = {
                 user_id: useranalysis.user_id,
                 userName:useranalysis.userName,
+                thumbnail:useranalysis.thumbnail,
                 _id: useranalysis._id,
                 videouri: useranalysis.videouri,
                 createdAt: useranalysis.createdAt,
