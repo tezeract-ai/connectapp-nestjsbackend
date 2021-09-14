@@ -127,7 +127,7 @@ console.log('kickfoot',kickfoot)
                 headers: formData.getHeaders()
             }
             try {
-                fetch('http://139.59.34.247:5000/api/video_processing', options)
+                fetch('https://playercloud-backend.ml/api/video_processing', options)
             } catch (error) {
                 console.log('error', error)
             }
