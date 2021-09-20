@@ -29,6 +29,9 @@ type:String
     videouri:  {
         type: Array,
     },
+    kickfoot:{
+        type:String
+    },
     shared_to:  {
         type: Array,
     }, analysis: {
@@ -54,6 +57,8 @@ export interface Analytics {
     Post_Frame: string;
     ai_video: string[];
     videouri: string[];
+    kickfoot: string;
+
 video:any
     ai_response: string[];
 kicktype:string;

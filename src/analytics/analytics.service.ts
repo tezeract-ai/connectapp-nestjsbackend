@@ -97,7 +97,7 @@ export class AnalyticsService {
 let kickfoot=kickingFoot==='Left Foot' ? 'Left' : 'Right'
 console.log('kickfoot',kickfoot)
             let formData = new FormData();
-            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName,thumbnail:thumbnailOfVideoUri, kicktype: kicktype, useravatar:useravatar,videouri: videouri });
+            const newAnalyis = await new this.analyticsModel({ user_id: user_id,userName:userName,thumbnail:thumbnailOfVideoUri, kicktype: kicktype, useravatar:useravatar,videouri: videouri ,kickfoot:kickfoot});
             console.log('newAnalyis', newAnalyis)
             let useranalysis = await newAnalyis.save()
             console.log('useranalysis', useranalysis)
@@ -142,7 +142,8 @@ console.log('kickfoot',kickfoot)
                 videouri: useranalysis.videouri,
                 createdAt: useranalysis.createdAt,
                 kicktype: useranalysis.kicktype,
-                useravatar:useranalysis.useravatar
+                useravatar:useranalysis.useravatar,
+                kickfoot:useranalysis.kickfoot
             }
             console.log('useranalysis2', useranalysis)
             return useranalysis
