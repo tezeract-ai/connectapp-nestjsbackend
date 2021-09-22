@@ -28,6 +28,21 @@ export class UsersdataController {
         @Body('userid') userid: any): Promise<any> {
         return this.usersdataService.getdataofusers(userid);
     }
-  
+    @Post('/notificationpopup')
+    popupofnotification(
+        @Body('userid') userid: any): Promise<any> {
+        return this.usersdataService.popupofnotification(userid);
+    }
 
+    @Post('/requestNotification')
+    reqNotification(
+        @Body('userid') userid: any, @Body('userName') userName: any,@Res() response:Response): Promise<any> {
+        return this.usersdataService.reqNotification(userid,userName,response);
+    }
+    @Post('/closerequestNotification')
+    closepopupofnotification(
+        @Body('userid') userid: any,): Promise<any> {
+        return this.usersdataService.closepopupofnotification(userid);
+    }
+    
 }
