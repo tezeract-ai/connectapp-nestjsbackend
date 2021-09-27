@@ -18,31 +18,11 @@ export class UsersdataController {
 
    
 
-    @Post()
+    @Post('/sendUserLocation')
     createusersdata(
-        @Body('userid') userid: any,  @Body('fcmtoken') fcmtoken: any): Promise<any> {
-        return this.usersdataService.createusersdata(userid,fcmtoken);
+        @Body('userid') userid: any,  @Body('userdata') userdata: any,@Body('userlocation') userlocation: any): Promise<any> {
+        return this.usersdataService.createusersdata(userid,userdata,userlocation);
     }
-    @Post('/getusersdata')
-    getdataofusers(
-        @Body('userid') userid: any): Promise<any> {
-        return this.usersdataService.getdataofusers(userid);
-    }
-    @Post('/notificationpopup')
-    popupofnotification(
-        @Body('userid') userid: any): Promise<any> {
-        return this.usersdataService.popupofnotification(userid);
-    }
-
-    @Post('/requestNotification')
-    reqNotification(
-        @Body('userid') userid: any, @Body('userName') userName: any,@Res() response:Response): Promise<any> {
-        return this.usersdataService.reqNotification(userid,userName,response);
-    }
-    @Post('/closerequestNotification')
-    closepopupofnotification(
-        @Body('userid') userid: any,): Promise<any> {
-        return this.usersdataService.closepopupofnotification(userid);
-    }
+   
     
 }
