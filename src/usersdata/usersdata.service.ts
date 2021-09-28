@@ -14,6 +14,7 @@ export class UsersdataService {
 
     async filteredusersdata(searchquery: any,userlocation:any,userid:any): Promise<any> {
         console.log('userid', searchquery,userlocation,userid)
+        if(searchquery.length>0){
         const filterbydistance=await this.usersdataModel.find(
             {$and:[
                 {
@@ -27,7 +28,7 @@ export class UsersdataService {
                   }
                 },
              } , 
-             {"userdata.email" : {$regex :searchquery }}     ,
+             {"userdata.email" : {$regex :searchquery }},
              { userid: { $ne: userid } } 
               ]}
 
@@ -54,7 +55,9 @@ export class UsersdataService {
     //        }))  
     //        console.log('filterbydistancefilterbydistance',filterbydistance)
  
-           return filterbydistance
+           return filterbydistance}else{
+             return []
+           }
         }
 
 
