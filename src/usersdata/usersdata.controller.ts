@@ -18,8 +18,8 @@ export class UsersdataController {
 
     @Post('/getFilteredUsers')
     filteredusersdata(
-        @Body('searchquery') searchquery: any, @Body('userlocation') userlocation:any): Promise<any> {
-        return this.usersdataService.filteredusersdata(searchquery,userlocation);
+        @Body('searchquery') searchquery: any,@Body('userlocation') userlocation:any,@Body('userid') userid:any): Promise<any> {
+        return this.usersdataService.filteredusersdata(searchquery,userlocation,userid);
     }
 
     @Post('/sendUserLocation')

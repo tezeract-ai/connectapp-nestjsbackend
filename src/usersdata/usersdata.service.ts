@@ -12,10 +12,11 @@ import { Usersdata } from './usersdata.model'
 export class UsersdataService {
     constructor(@InjectModel('Usersdata') private readonly usersdataModel: Model<any>) { }
 
-    async filteredusersdata(searchquery: any,userlocation:any): Promise<any> {
-        console.log('userid', searchquery,userlocation)
+    async filteredusersdata(searchquery: any,userlocation:any,userid:any): Promise<any> {
+        console.log('userid', searchquery,userlocation,userid)
         const filterbydistance=await this.usersdataModel.find(
-            {and:[{
+            {$and:[
+                {
                 location: {
                   $near: {
                     $geometry: {
@@ -25,9 +26,10 @@ export class UsersdataService {
                     $maxDistance: 5000,
                   }
                 },
-             }  
-             ,          
-               {"userdata.email" : {$regex :searchquery }}]}
+             } , 
+             {"userdata.email" : {$regex :searchquery }}     ,
+             { userid: { $ne: userid } } 
+              ]}
 
                )
                console.log('filterbydistancefilterbydistance',filterbydistance)
