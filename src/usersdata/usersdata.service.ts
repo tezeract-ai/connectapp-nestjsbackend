@@ -15,7 +15,7 @@ export class UsersdataService {
     async filteredusersdata(searchquery: any,userlocation:any): Promise<any> {
         console.log('userid', searchquery,userlocation)
         const filterbydistance=await this.usersdataModel.find(
-            {$and:[{
+            {and:[{
                 location: {
                   $near: {
                     $geometry: {
