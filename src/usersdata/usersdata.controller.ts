@@ -16,12 +16,16 @@ import { Request,Response } from 'express';
 export class UsersdataController {
     constructor(private readonly usersdataService: UsersdataService) { }
 
-   
+    @Post('/getFilteredUsers')
+    filteredusersdata(
+        @Body('searchquery') searchquery: any, @Body('userlocation') userlocation:any): Promise<any> {
+        return this.usersdataService.filteredusersdata(searchquery,userlocation);
+    }
 
     @Post('/sendUserLocation')
     createusersdata(
-        @Body('userid') userid: any,  @Body('userdata') userdata: any,@Body('userlocation') userlocation: any): Promise<any> {
-        return this.usersdataService.createusersdata(userid,userdata,userlocation);
+        @Body('userid') userid: any,  @Body('userdata') userdata: any,@Body('location') location: any): Promise<any> {
+        return this.usersdataService.createusersdata(userid,userdata,location);
     }
    
     
