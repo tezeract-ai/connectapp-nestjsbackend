@@ -11,9 +11,17 @@ import { Usersdata } from './usersdata.model'
 @Injectable()
 export class UsersdataService {
     constructor(@InjectModel('Usersdata') private readonly usersdataModel: Model<any>) { }
+    async storingtoken(userid: any,userdata:any,expotoken:any): Promise<any> {
+      console.log('expotoken', userid,userdata,expotoken)
+      const createdataofusers=await this.usersdataModel.findOneAndUpdate({userid:userid}, {userid:userid ,userdata:userdata,expotoken:expotoken,location:{type:'Point',coordinates:[0,0]}}, { new: true,upsert: true,returnNewDocument:true });
+      console.log("createdataofusers",createdataofusers)
+      return await createdataofusers.save()
+  }
+    
+
 
     async filteredusersdata(searchquery: any,userlocation:any,userid:any): Promise<any> {
-        console.log('userid', searchquery,userlocation,userid)
+        console.log('userid', searchquery,userlocation,userid,searchquery.length)
         if(searchquery.length>0){
         const filterbydistance=await this.usersdataModel.find(
             {$and:[
@@ -68,7 +76,29 @@ export class UsersdataService {
         return await createdataofusers.save()
     }
    
+    async acceptingconnection(userid: any,connectionid:any): Promise<any> {
+      console.log('acceptingconnection', userid,connectionid)
+      const connectionaccept1= await this.usersdataModel.findOneAndUpdate({userid:userid},  {
+        $push: {
+          connection: {
+              $each: [ connectionid ],
+              $position: 0
+           }
+        }
+      } ,{new: true, upsert: true }).exec();
 
+      const connectionaccept2= await this.usersdataModel.findOneAndUpdate({userid:connectionid},  {
+        $push: {
+          connection: {
+              $each: [ userid ],
+              $position: 0
+           }
+        }
+      } ,{new: true, upsert: true }).exec();
+
+      return 'You both are a connection now '
+
+  }
 
   
     
