@@ -26,6 +26,7 @@
     "@nestjs/mongoose": "^6.2.1",
     "@nestjs/platform-express": "^6.7.2",
     "axios": "^0.19.2",
+    "firebase-admin": "^10.0.0",
     "mongoose": "^5.8.7",
     "nestjs-form-data": "^1.4.3",
     "node-fetch": "^2.6.1",
