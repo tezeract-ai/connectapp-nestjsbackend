@@ -3,17 +3,23 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import admin from "../../firebase-admin";
 @Injectable()
+
 export class NotificationsService {
-  async sendNotification(token) {
-    console.log("token",token)
+
+  async sendNotification(token, title, body) {
+    // console.log("notif body", token, title, body)
     // This registration token comes from the client FCM SDKs.
     const registrationToken = token;
 
     const message = {
-      data: {
-        score: "850",
-        time: "2:45",
+      notification: {
+        title: title,
+        body: body,
       },
+      // data: {
+      //   score: "850",
+      //   time: "2:45",
+      // },
       token: registrationToken,
     };
 
@@ -29,5 +35,7 @@ export class NotificationsService {
       .catch((error) => {
         console.log("Error sending message:", error);
       });
+
+    return [200, "Notification sent successfully"]
   }
 }
