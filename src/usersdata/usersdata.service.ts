@@ -11,14 +11,13 @@ import { Usersdata } from './usersdata.model'
 @Injectable()
 export class UsersdataService {
   constructor(@InjectModel('Usersdata') private readonly usersdataModel: Model<any>) { }
+
   async storingtoken(userid: any, userdata: any, expotoken: any): Promise<any> {
     // console.log('expotoken', userid,userdata,expotoken)
     const createdataofusers = await this.usersdataModel.findOneAndUpdate({ userid: userid }, { userid: userid, userdata: userdata, expotoken: expotoken, location: { type: 'Point', coordinates: [0, 0] } }, { new: true, upsert: true, returnNewDocument: true });
     // console.log("createdataofusers",createdataofusers)
     return await createdataofusers.save()
   }
-
-
 
   async filteredusersdata(searchquery: any, userlocation: any, userid: any): Promise<any> {
     // console.log('userid', searchquery,userlocation,userid,searchquery.length)
@@ -33,7 +32,7 @@ export class UsersdataService {
                     type: "Point",
                     coordinates: userlocation
                   },
-                  $maxDistance: 5000,
+                  $maxDistance: 5,
                 }
               },
             },
