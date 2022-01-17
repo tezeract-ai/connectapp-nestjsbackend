@@ -69,14 +69,15 @@ export class UsersdataService {
       //        )
       //        console.log('locationnnn',filt?.location?.coordinates[1])
       //        }))
-      const c = filterbydistance[0].connection
+      if (filterbydistance.length > 0) {
+        const c = filterbydistance[0].connection
 
-      console.log('filterbydistancefilterbydistance', filterbydistance, c)
-      if (c.includes(userid)) {
-        console.log('user pehle se connected hai ')
-        return []
+        console.log('filterbydistancefilterbydistance', filterbydistance, c)
+        if (c.includes(userid)) {
+          console.log('user pehle se connected hai ')
+          return []
+        }
       }
-
       return filterbydistance
     } else {
       return []
