@@ -7,7 +7,7 @@ import { Usersdata } from './usersdata.model'
 export class UsersdataService {
   constructor(
     @InjectModel('Usersdata') private readonly usersdataModel: Model<any>
-  ) {}
+  ) { }
 
   async storingtoken(userid: any, userdata: any, expotoken: any): Promise<any> {
     // console.log('expotoken', userid,userdata,expotoken)
@@ -19,9 +19,11 @@ export class UsersdataService {
         expotoken: expotoken,
         location: { type: 'Point', coordinates: [0, 0] },
       },
+      //@ts-ignore
       { new: true, upsert: true, returnNewDocument: true }
     )
     // console.log("createdataofusers",createdataofusers)
+    //@ts-ignore
     return await createdataofusers.save()
   }
 
@@ -93,9 +95,11 @@ export class UsersdataService {
         userdata: userdata,
         location: { type: 'Point', coordinates: location },
       },
+      //@ts-ignore
       { new: true, upsert: true, returnNewDocument: true }
     )
     // console.log("createdataofusers",createdataofusers)
+    //@ts-ignore
     return await createdataofusers.save()
   }
 
