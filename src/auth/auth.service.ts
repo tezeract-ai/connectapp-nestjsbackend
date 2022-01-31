@@ -31,7 +31,7 @@ export class AuthService {
           hash: userExist.hash,
           token: token,
         }
-        return userExist
+        return {userExist, statusCode : 200 }
       } catch (error) {
         throw [404, error.message]
       }
