@@ -7,7 +7,7 @@ import { Usersdata } from './usersdata.model'
 export class UsersdataService {
   constructor(
     @InjectModel('Usersdata') private readonly usersdataModel: Model<any>
-  ) { }
+  ) {}
 
   async storingtoken(userid: any, userdata: any, expotoken: any): Promise<any> {
     // console.log('expotoken', userid,userdata,expotoken)
